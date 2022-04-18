@@ -1,10 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
 
-interface FormData {
-  email: string;
-  name: string;
-}
-
 export const UseForm = <T extends Object>(initialState: T) => {
   const [formData, setFormData] = useState(initialState);
 
@@ -13,5 +8,9 @@ export const UseForm = <T extends Object>(initialState: T) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  return { formData, handleChange };
+  const handleReset = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setFormData(initialState);
+  };
+
+  return { formData, handleChange, handleReset };
 };
