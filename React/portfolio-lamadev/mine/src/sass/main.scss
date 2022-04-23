@@ -1,0 +1,736 @@
+$secondary-color: white;
+$topbar-height: 4rem;
+$mainColor: #15023a;
+$width: 768px;
+
+@mixin mobile {
+  @media (max-width: #{$width}){
+      @content
+  }
+}
+
+
+* {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+
+.app{
+  height: 100vh;
+
+  .sections{
+      width: 100%;
+      height: calc(100vh - $topbar-height);
+      background-color: lightsalmon;
+      position: relative;
+      top: $topbar-height;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      scrollbar-width: none; //for firefox
+      &::-webkit-scrollbar{
+          display: none;
+      }
+
+      > *{
+          width: 100vw;
+          height: calc(100vh - $topbar-height);
+          scroll-snap-align: start;
+      }
+  }
+}
+
+.topbar{
+  background-color: $secondary-color;
+  color: $mainColor;
+  width: 100%;
+  height: $topbar-height;
+  position: fixed;
+  top: 0;
+  z-index: 3;
+  transition: all 1s ease;
+  
+
+  .wrapper{
+    padding: 0.625rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .left {
+      display: flex;
+      align-items: center;
+
+      .logo {
+        font-size: 2.2rem;
+        font-weight: 700;
+        text-decoration: none;
+        color: inherit;
+        margin-right: 2.5rem;
+      }
+
+      .itemContainer {
+        display: flex;
+        align-items: center;
+        margin-left: 2rem;
+
+        @include mobile{
+          display: none;
+        }
+
+        .icon {
+          font-size: 1rem;
+          margin-right: 5px;
+        }
+
+        span {
+          font-size: 1rem;
+          font-weight: 500;
+        }
+      }
+    }
+    
+    .right {
+      .hamburger {
+        
+        width: 2rem;
+        height: 1.6rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        cursor: pointer;
+
+        span {
+          width: 100%;
+          height: 3px;
+          background-color: $mainColor;
+          transform-origin: left;
+          transition: all 2s ease;
+        }
+      }
+    }    
+  }
+  &.active {
+    background-color: $mainColor;
+    color: white;
+
+    .hamburger {
+      span {
+        &:first-child {
+          background-color: white;
+          transform: rotate(45deg);
+        }
+        &:nth-child(2) {
+          opacity: 0;
+        }
+        &:last-child {
+          background-color: white;
+          transform: rotate(-45deg);
+        }
+      }
+    }
+  }
+}
+
+.menu {
+  width: 20rem;
+  height: 100vh;
+  background-color: $mainColor;
+  position: fixed;
+  top: 0;
+  right: -20rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s ease;
+
+  &.active {
+    right: 0;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 2rem;
+    font-weight: 300;
+    color: white;
+    width: 60%;
+
+    li {
+      margin-bottom: 25px;
+      a {
+        font-size: inherit;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      &:hover {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.intro {
+  background-color: white;
+  display: flex;
+
+  @include mobile{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .left {
+    flex: 0.5;
+    
+    // overflow: hidden;
+
+    .imgContainer {
+      width: 43rem;
+      height: 43rem;
+      background-color: crimson;
+      border-radius: 50%;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      float: right;
+
+      @include mobile{
+        align-items: flex-start;
+      }
+
+      img {
+        height: 90%;
+
+        @include mobile{
+          height: 50%;
+        }
+      }
+    }
+  }
+  .right {
+    flex: 0.5;
+    position: relative;
+
+    .wrapper {
+      width: 100%;
+      height: 100%;
+      padding-left: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      @include mobile{
+        padding-left: 0;
+        align-items: center;
+      }
+
+      h1 {
+        font-size: 60px;
+        margin: 10px 0;
+
+        @include mobile{
+          font-size: 40px;
+        }
+      }
+      h2 {
+        font-size: 35px;
+      }
+      h3 {
+        font-size: 30px;
+
+        @include mobile{
+          font-size: 20px;
+        }
+
+        span {
+          font-size: inherit;
+          color: crimson;
+        }
+
+        .ityped-cursor {
+          animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50%{
+                opacity: 1;
+            }
+            100%{
+                opacity: 0;
+            }
+        }
+      }
+    }
+    a {
+      position: absolute;
+      bottom: 10px;
+      left: 40%;
+
+      img {
+        width: 30px;
+        animation: arrowBlink 2s infinite;
+      }
+
+      @keyframes arrowBlink {
+        100% {
+          opacity: 0;
+        }
+      }
+    }
+  }
+}
+
+
+.portfolio {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    font-size: 50px;
+
+    @include mobile{
+      font-size: 20px;
+    }
+  }
+
+  ul {
+    margin: 10px;
+    padding: 0;
+    list-style: none;
+    display: flex;
+
+    @include mobile{
+      margin: 10px 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+  }
+
+  .container {
+    width: 70%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    @include mobile{
+      width: 100%;
+    }
+
+    .item {
+      width: 220px;
+      height: 150px;
+      border-radius: 20px;
+      border: 1px solid rgb(240, 239, 239);
+      margin: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+      transition: all .5s ease;
+      cursor: pointer;
+
+      @include mobile{
+        width: 130px;
+        height: 100px;
+      }
+
+      h3 {
+        position: absolute;
+        font-size: 20px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+      }
+
+      &:hover {
+        background-color: $mainColor;
+        img {
+          opacity: 0.2;
+          z-index: 0;
+        }
+      }
+    }
+  }
+}
+
+.portfolioList {
+  font-size: 14px;
+  margin-right: 50px;
+  padding: 7px;
+  border-radius: 10px;
+  cursor: pointer;
+
+  @include mobile{
+    margin-right: 20px;
+  }
+
+  &.active {
+    background-color: $mainColor;
+    color: white;
+  }
+}
+
+
+.works {
+  background-color: crimson;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  .arrow {
+    height: 50px;
+    position: absolute;
+    cursor: pointer;
+
+    @include mobile {
+      display: none;
+    }
+
+    &.left {
+      left: 100px;
+      transform: rotateY(180deg);
+    }
+
+    &.right {
+      right: 100px;
+    }
+  }
+
+  .slider {
+    height: 350px;
+    display: flex;
+    position: absolute;
+    left: 0;
+    transition: all 1s ease-out;
+
+    @include mobile {
+      height: 100vh;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .container {
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      
+
+      .item {
+        width: 700px;
+        height: 100%;
+        background-color: white;
+        border-radius: 20px;        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @include mobile {
+          width: 80%;
+          height: 150px;
+          margin: 15px 0;
+        }
+
+        .left {
+          flex: 4;
+          height: 80%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .leftContainer {
+            width: 90%;
+            height: 70%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .imgContainer {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              background-color: rgb(245, 179, 155);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              @include mobile {
+                width: 20px;
+                height: 20px;
+              }
+
+              img {
+                width: 25px;
+
+                @include mobile {
+                  width: 15px;
+                }
+              }
+            }
+            h2 {
+              font-size: 20px;
+
+              @include mobile{
+                font-size: 13px;
+              }
+            }
+            p {
+              font-size: 13px;
+              @include mobile{
+                display: none;
+              }
+            }
+            span {
+              font-size: 12px;
+              font-weight: 600;
+              text-decoration: underline;
+              cursor: pointer;
+            }
+          }
+        }
+        .right {
+          flex: 8;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+
+          img {
+            width: 400px;
+            transform: rotate(-10deg);
+          }
+        }
+      }
+    }
+  }
+}
+
+
+.testimonials {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include mobile{
+    justify-content: space-around;
+  }
+
+
+  h1 {
+    font-size: 50px;
+
+    @include mobile{
+      font-size: 20px;
+    }
+  }
+
+  .container {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include mobile{
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card {
+      width: 250px;
+      height: 70%;
+      border-radius: 10px;
+      box-shadow: 0px 0px 15px -8px black;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 20px;
+      transition: all 1s ease;
+
+      @include mobile{
+        height: 180px;
+        margin: 10px 0;
+      }
+
+      &.featured{
+          width: 300px;
+          height: 75%;
+          margin: 0 30px;
+
+          @include mobile{
+            width: 250px;
+            height: 180px;
+            margin: 1px;
+          }
+      }
+
+      &:hover{
+          transform: scale(1.1);
+      }
+
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          &.left,
+          &.right {
+            height: 25px;
+          }
+          &.user {
+            height: 60px;
+            width: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 30px;
+
+            @include mobile{
+              width: 30px;
+              height: 30px;
+            }
+          }
+        }
+      }
+
+      .center {
+        padding: 10px;
+        border-radius: 10px;
+        background-color: rgb(250, 244, 245);
+
+        @include mobile{
+          font-size: 12px;
+          padding: 5px;
+        }
+      }
+      .bottom {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+
+        h3 {
+          margin-bottom: 5px;
+
+          @include mobile{
+            font-size: 14px;
+          }
+        }
+        h4{
+            color: rgb(121, 115, 115);
+            @include mobile{
+              font-size: 13px;
+            }
+        }
+      }
+    }
+  }
+}
+
+
+
+.contact {
+  background-color: white;
+  display: flex;
+
+  @include mobile {
+    flex-direction: column;
+  }
+
+  .left {
+    flex: 1;
+    overflow: hidden;
+
+    img {
+      height: 100%;
+    }
+  }
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+      font-size: 30px;
+    }
+
+    form {
+      width: 70%;
+      height: 70%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+
+      input {
+        width: 300px;
+        height: 30px;
+        font-size: 14px;
+
+        @include mobile {
+          width: 200px;
+          height: 20px;
+        }
+      }
+
+      textarea {
+        width: 300px;
+        height: 200px;
+        font-size: 14px;
+
+        @include mobile {
+          width: 200px;
+          height: 100px;
+        }
+      }
+
+      button {
+        width: 150px;
+        height: 30px;
+        color: white;
+        background-color: crimson;
+        border: none;
+        border-radius: 10px;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      span {
+        color: green;
+      }
+    }
+  }
+}
+
+
+
+
+.portfolio{
+
+background-color: lightskyblue;
+}
+
+
