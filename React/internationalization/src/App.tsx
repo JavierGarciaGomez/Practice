@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
+// import LanguageDetector from "i18next-browser-languagedetector";
 
 import { Welcome } from "./components/Welcome";
 import global_en from "./translations/en/global.json";
@@ -12,7 +12,7 @@ import { LanguageSelector } from "./components/LanguageSelector";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
-  .use(LanguageDetector)
+  // .use(LanguageDetector)
   .init({
     supportedLngs: ["en", "es"],
     // the translations
@@ -32,7 +32,7 @@ i18n
     detection: {
       order: ["navigator", "localStorage", "htmlTag", "cookie", "sessionStorage", "path", "subdomain"],
     },
-    backend: { loadPath: "/assets/locales/{{lng}}/translation.json" },
+
     react: { useSuspense: false },
   });
 
