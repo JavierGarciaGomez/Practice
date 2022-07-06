@@ -143,7 +143,7 @@ const iceCreamReducer = (
     case iceCreamActions.ICECREAM_ORDERED:
       return {
         ...state,
-        numOfIceCreams: state.numOfIceCreams + action.payload,
+        numOfIceCreams: state.numOfIceCreams - action.payload,
       };
 
     case iceCreamActions.ICECREAM_RESTOCKED:
@@ -201,11 +201,13 @@ enum addressActions {
   STREET_UPDATED = "STREET_UPDATED",
 }
 
+// actions
 type AdressActionTypes = {
   type: addressActions.STREET_UPDATED;
   payload: string;
 };
 
+// Action creator
 const updateStreet = (street: string) => ({
   type: addressActions.STREET_UPDATED,
   payload: street,
@@ -241,7 +243,7 @@ adressUnsuscribe();
 /***************Lesson 14 Middleware ************************/
 const store3 = createStore(rootReducer, applyMiddleware(logger));
 
-console.log("Lesson 14 - initial state", store3.getState());
+console.log("Lesson 14 MIDDLEWARE - initial state", store3.getState());
 
 // const unsubscribe3 = store3.subscribe(() =>
 //   console.log("update state 3", { ...store3.getState() })
@@ -258,7 +260,7 @@ actions3.orderCake(5);
 actions3.ordericeCream(15);
 actions3.restockiceCream(9);
 
-unsubscribe2();
+unsubscribe3();
 
 /***************Lesson 15 Async ************************/
 

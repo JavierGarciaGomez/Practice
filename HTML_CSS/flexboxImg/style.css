@@ -1,0 +1,17 @@
+.flexContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 100vh;
+    
+}
+
+.imgContainer{
+    flex: 1;
+    height: 20%
+}
+
+.imgContainer img{
+    width: 100%;
+    height: 100%
+}
