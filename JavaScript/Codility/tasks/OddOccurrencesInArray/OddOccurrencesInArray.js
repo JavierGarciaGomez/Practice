@@ -36,14 +36,13 @@ all but one of the values in A occur an even number of times.
 
 */
 
-const solution = (array = []) => {
+const solution = (A = []) => {
   let result;
-  let shit;
-  array.forEach((element1) => {
-    shit ^= element1;
+
+  A.forEach((element1) => {
     console.log("what", { element1, shit });
     let count = 0;
-    array.forEach((element2) => {
+    A.forEach((element2) => {
       //   console.log({ element1, element2, count });
       if (element1 === element2) {
         count++;

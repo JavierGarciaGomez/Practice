@@ -39,7 +39,8 @@ const solution = (number) => {
     const currentNum = binaryNumber[i];
     if (currentNum === "0") {
       countGap++;
-      maxCountGap = Math.max(countGap, maxCountGap);
+      if (binaryNumber[i + 1] === "1")
+        maxCountGap = Math.max(countGap, maxCountGap);
     } else {
       countGap = 0;
     }
@@ -55,3 +56,6 @@ solution(1111);
 solution(1);
 solution(5);
 solution(2147483647);
+solution(32);
+
+// https://app.codility.com/demo/results/training37GAWR-DM6/

@@ -46,7 +46,19 @@ In your solution, focus on correctness. The performance of your solution will no
 const solution = (A = [], K = 0) => {
   const newArray = [];
   for (i = 0; i < A.length; i++) {
-    const newIndex = i + K < A.length ? i + K : i + K - A.length;
+    let newIndex = 0;
+    newIndex = (i + K) % A.length;
+    // if (i + K < A.length) {
+    //   newIndex = i + K;
+    // } else {
+    //   //   newIndex = i + K - (A.length-1);
+    //   //   if (newIndex > A.length) {
+    //   newIndex = (i + K) % A.length;
+    //   //   }
+    // }
+
+    // console.log({ newIndex });
+
     newArray[newIndex] = A[i];
   }
   return newArray;
@@ -55,3 +67,6 @@ const solution = (A = [], K = 0) => {
 console.log(solution([3, 8, 9, 7, 6], 3));
 console.log(solution([0, 0, 0], 1));
 console.log(solution([1, 2, 3, 4], 4));
+console.log(solution([1], 5));
+console.log(solution([1, 4], 5));
+console.log(solution([1, 4, 2, 3, 4], 6));
